@@ -9,7 +9,6 @@
  * @author Edgar
  */
 package arboles;
-import recorridos.*;
 
 public class Pruebas {
     
@@ -34,8 +33,10 @@ public class Pruebas {
         arbol.add(n9,n2,1);
         arbol.add(n15,n16,1);
         arbol.add(n8,n3,0);
-        Nodo hoja = Recorridos.getHoja(arbol.getRoot());
-        System.out.println(hoja.getValor());
+        arbol.breadthFrist();
+        arbol.eliminarNodo(n16);
+        System.out.println("Nodo eliminado");
+        arbol.breadthFrist();
 
         //Arbol binario de busqueda
         /*ArbolBusqueda busqueda = new ArbolBusqueda(n7);

@@ -80,11 +80,13 @@ public class ArbolBin {
     public void eliminarNodo(Nodo aEliminar){
         Nodo auxiliar = aEliminar;
         if(aEliminar.getDer() == null && aEliminar.getIzq() == null){ //Caso de nodo Hoja
-            aEliminar = null;
+            eliminarHoja(aEliminar);
+            System.out.println("Estás eliminando una hoja");
             
         }else{
             if(aEliminar.getIzq() == null || aEliminar.getDer() == null){ //Caso de que tiene un hijo
-                Nodo padre = auxiliar.getPadre();
+                System.out.println("Estás eliminando un nodo con un hijo");
+                Nodo padre = auxiliar.getPadre(); //Falta aquí considerar si la raíz tiene un solo hijo
                 if(esHijoIzquierdo(aEliminar)){
                     padre.setIzq(hijoDisponible(auxiliar));
                     aEliminar = null;
@@ -93,12 +95,23 @@ public class ArbolBin {
                     aEliminar = null;
                 }
             }else{ // Caso donde tiene 2 hijos
+                System.out.println("Estás eliminando un nodo con 2 hijos...");
                 //while hijodisponible(nuevo) == null
-
+                auxiliar = getHoja(aEliminar); // Se obtiene algún nodo hoja iniciando desde el nodo a eliminar (que tiene 2 hijos)
+                //Hacer lo de los padres
+                aEliminar.setValor(auxiliar.getValor());
+                eliminarHoja(auxiliar);
 
             }
         }
+    }
 
+    protected void eliminarHoja(Nodo hoja){
+        Nodo padre = hoja.getPadre();
+        if(esHijoIzquierdo(hoja)){
+            padre.setIzq(null);
+            }else padre.setDer(null);
+        hoja = null; // Se elimina la hoja finalmente
     }
     
     public String notacionPrefija(){
@@ -135,7 +148,7 @@ public class ArbolBin {
         return hoja;
     }
 
-    private static boolean esHoja(Nodo nodo){
+    protected static boolean esHoja(Nodo nodo){
         if(nodo.getDer() == null && nodo.getIzq() == null){
             return true;
         }else return false;

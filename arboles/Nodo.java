@@ -41,6 +41,10 @@ public class Nodo {
         this.padre = padre;
     }
 
+    public void setValor(int valor){
+        this.valor = valor;
+    }
+
     public Nodo getIzq(){
         return izq;
     }

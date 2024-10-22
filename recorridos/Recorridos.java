@@ -1,3 +1,4 @@
+package recorridos;
 import arboles.Nodo;
 public class Recorridos{
     public static void recorridoPreOrden(Nodo raiz, StringBuilder notacion) {

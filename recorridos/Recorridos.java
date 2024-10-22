@@ -1,32 +1,30 @@
-package recorridos;
 import arboles.Nodo;
 public class Recorridos{
-    public static void recorridoPreOrden(Nodo raiz) {
+    public static void recorridoPreOrden(Nodo raiz, StringBuilder notacion) {
         //Examinar nodo
         //Recorrer subarbol izquierdo
         //Recorrer subarbol derecho
         if(raiz != null){
-            System.out.println("Nodo: " + raiz.getValor());
-            recorridoPreOrden(raiz.getIzq());
-            recorridoPreOrden(raiz.getDer());
+            notacion.append(raiz.getValor()).append(" ");
+            recorridoPreOrden(raiz.getIzq(), notacion);
+            recorridoPreOrden(raiz.getDer(), notacion);
         }
     }
     
-    public static void recorridoInOrden(Nodo raiz){
+    public static void recorridoInOrden(Nodo raiz, StringBuilder notacion){
         if(raiz != null){
-            recorridoInOrden(raiz.getIzq());
-            System.out.println("Nodo: " + raiz.getValor());
-            recorridoInOrden(raiz.getDer());
+            recorridoInOrden(raiz.getIzq(), notacion);
+            notacion.append(raiz.getValor()).append(" ");
+            recorridoInOrden(raiz.getDer(), notacion);
         }
     }
 
-    public static void recoridoPostOrden(Nodo raiz){
+    public static void recorridoPostOrden(Nodo raiz, StringBuilder notacion){
         if(raiz!= null){
-            recoridoPostOrden(raiz.getIzq());
-            recoridoPostOrden(raiz.getDer());
-            System.out.println("Nodo: " + raiz.getValor());
+            recorridoPostOrden(raiz.getIzq(), notacion);
+            recorridoPostOrden(raiz.getDer(), notacion);
+            notacion.append(raiz.getValor()).append(" ");
         }
 
     }
 }
-

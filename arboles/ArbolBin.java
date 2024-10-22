@@ -1,6 +1,7 @@
 package arboles;
 import java.util.LinkedList;
 import java.util.Queue;
+import recorridos.Recorridos;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -93,9 +94,51 @@ public class ArbolBin {
                 }
             }else{ // Caso donde tiene 2 hijos
                 //while hijodisponible(nuevo) == null
+
+
             }
         }
 
+    }
+    
+    public String notacionPrefija(){
+        StringBuilder prefija = new StringBuilder();
+        Recorridos.recorridoInOrden(root, prefija);
+        return prefija.toString().trim();
+    }
+
+    public String notacionInfija(){
+        StringBuilder prefija = new StringBuilder();
+        Recorridos.recorridoInOrden(root, prefija);
+        return prefija.toString().trim();
+    }
+
+    public String notacionPostfija(){
+        StringBuilder prefija = new StringBuilder();
+        Recorridos.recorridoPostOrden(root, prefija);
+        return prefija.toString().trim();
+    }
+
+    public static Nodo getHoja(Nodo nodo){
+        Nodo hoja = null;
+        if(nodo!= null){
+            if(esHoja(nodo)){
+                System.out.println("Nodo " + nodo.getValor());
+                return nodo;
+            }
+            hoja = getHoja(nodo.getIzq());
+            if(hoja != null) return hoja;
+            hoja = getHoja(nodo.getDer());
+            if(hoja != null) return hoja;
+
+        }
+        return hoja;
+    }
+
+    private static boolean esHoja(Nodo nodo){
+        if(nodo.getDer() == null && nodo.getIzq() == null){
+            return true;
+        }else return false;
     }
 
 }

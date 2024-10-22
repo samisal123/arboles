@@ -1,4 +1,5 @@
 package arboles;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 import recorridos.Recorridos;
@@ -47,8 +48,8 @@ public class ArbolBin {
     
     public void breadthFrist(){
         Nodo r = root;
-	Queue<Nodo> queue = new LinkedList();
-	if(r!=null){
+	    Queue<Nodo> queue = new LinkedList();
+	    if(r!=null){
             queue.add(r);
             while(!queue.isEmpty()){
                 r = (Nodo)queue.poll();
@@ -59,6 +60,24 @@ public class ArbolBin {
 		queue.add(r.der);
             }
 	}
+    }
+
+    public ArrayList<Nodo> recorrido(){
+        ArrayList<Nodo> nodos = new ArrayList<>();
+        Nodo r = root;
+	    Queue<Nodo> queue = new LinkedList();
+	    if(r!=null){
+            queue.add(r);
+            while(!queue.isEmpty()){
+                r = (Nodo)queue.poll();
+		nodos.add(r);
+		if(r.izq!=null)
+                    queue.add(r.izq);
+		if(r.der!=null)
+		queue.add(r.der);
+            }
+	}
+    return nodos;
     }
 
     public static Nodo hijoDisponible(Nodo padre){

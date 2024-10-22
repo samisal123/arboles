@@ -16,6 +16,7 @@ public class ArbolBusqueda extends ArbolBin{
             if(added.getValor() > raiz.getValor()){
                 if(raiz.getDer() == null){
                     raiz.setDer(added);
+                    added.setPadre(raiz);
                     break;
                 }else{
                     raiz = raiz.getDer();
@@ -23,6 +24,7 @@ public class ArbolBusqueda extends ArbolBin{
             }else if(added.getValor() < raiz.getValor()){
                 if(raiz.getIzq() == null){
                     raiz.setIzq(added);
+                    added.setPadre(raiz);
                     break;
                 }else{
                     raiz = raiz.getIzq();
@@ -36,7 +38,7 @@ public class ArbolBusqueda extends ArbolBin{
     @Override
     public void eliminarNodo(Nodo aEliminar){
         if(esHoja(aEliminar)){
-            aEliminar = null;
+            eliminarHoja(aEliminar);
         }else{
             Nodo aux = hijoDisponible(aEliminar); //Aux se convierte en el hijo disponible con preferencia al hijo izquierdo
             if(esHijoIzquierdo(aux)){
@@ -49,7 +51,7 @@ public class ArbolBusqueda extends ArbolBin{
             }
             aEliminar.setValor(aux.getValor());
             //Va a haber un hijo con el valor repetido
-            aux = null;
+            eliminarNodo(aux); // Llamada recursiva
             // Se elimina el hijo
         }
         //Hasta aquí, se modifica el auxiliar
